@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Metric implements IReducer<Metric> {
-    public String rollupKey; // TODO: Can I move it somewhere else?
+    public String rollupKey;
 
     public Map<String, List<Long>> iValuesForRollup;
     public Map<String, List<Double>> fValuesForRollup;
@@ -54,6 +54,12 @@ public class Metric implements IReducer<Metric> {
 
     @Override
     public Metric reduce(Metric newValue) {
+        reduceIValues(newValue);
+        reduceFValues(newValue);
+        return this;
+    }
+
+    private void reduceIValues(Metric newValue) {
         if(iValuesForRollup == null) {
             iValuesForRollup = new HashMap<>();
             ivalues.forEach((k,v) -> {
@@ -63,11 +69,7 @@ public class Metric implements IReducer<Metric> {
             });
         }
 
-        // TODO: do the same thing as done for iValuesForRollup
-        if(fValuesForRollup == null) fValuesForRollup = new HashMap<>();
-
         Map<String, Long> newIValues = newValue.ivalues;
-        Map<String, Double> newFValues = newValue.fvalues;
 
         for(String iKey : newIValues.keySet()){
             if(this.iValuesForRollup.containsKey(iKey)){
@@ -80,18 +82,30 @@ public class Metric implements IReducer<Metric> {
                 this.iValuesForRollup.put(iKey, valueList);
             }
         }
+    }
 
-        //TODO: Visit below code...
-        for(String fKey : newFValues.keySet()){
-            if(this.fvalues.containsKey(fKey)){
-                Double oldVal = this.fvalues.get(fKey);
-                this.fvalues.put(fKey, oldVal + newFValues.get(fKey));
-            }
-            else {
-                this.fvalues.put(fKey, newFValues.get(fKey));
-            }
+    private void reduceFValues(Metric newValue) {
+        if(fValuesForRollup == null) {
+            fValuesForRollup = new HashMap<>();
+            fvalues.forEach((k,v) -> {
+                List<Double> valueList = new ArrayList<>();
+                valueList.add(v);
+                fValuesForRollup.put(k, valueList);
+            });
         }
 
-        return this;
+        Map<String, Double> newFValues = newValue.fvalues;
+
+        for(String fKey : newFValues.keySet()){
+            if(this.fValuesForRollup.containsKey(fKey)){
+                List<Double> fValuesList = this.fValuesForRollup.get(fKey);
+                fValuesList.add(newFValues.get(fKey));
+            }
+            else {
+                List<Double> valueList = new ArrayList<>();
+                valueList.add(newFValues.get(fKey));
+                this.fValuesForRollup.put(fKey, valueList);
+            }
+        }
     }
 }

@@ -1,7 +1,6 @@
 package com.rackspacecloud.metrics.rollup;
 
 import org.apache.kafka.streams.KafkaStreams;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -11,9 +10,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class RollupApplication {
 
 	public static void main(String[] args) {
-//		SpringApplication.run(RollupApplication.class, args);
-
-
 		ConfigurableApplicationContext context =
 				new SpringApplicationBuilder(RollupApplication.class)
 						.web(WebApplicationType.NONE)
@@ -24,7 +20,7 @@ public class RollupApplication {
 		kafkaStreams.cleanUp();
 
 		kafkaStreams.setUncaughtExceptionHandler((Thread thread, Throwable throwable) -> {
-			System.out.println("MRIT ERROR: [" + throwable.getMessage() + "]");
+			System.out.println("ERROR: [" + throwable.getMessage() + "]");
 			// here you should examine the throwable/exception and perform an appropriate action!
 		});
 

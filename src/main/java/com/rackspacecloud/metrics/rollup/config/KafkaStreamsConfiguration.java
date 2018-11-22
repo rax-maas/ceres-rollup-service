@@ -9,10 +9,7 @@ import org.apache.kafka.common.serialization.Deserializer;
 import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.common.serialization.Serializer;
-import org.apache.kafka.streams.KafkaStreams;
-import org.apache.kafka.streams.KeyValue;
-import org.apache.kafka.streams.StreamsBuilder;
-import org.apache.kafka.streams.StreamsConfig;
+import org.apache.kafka.streams.*;
 import org.apache.kafka.streams.errors.LogAndContinueExceptionHandler;
 import org.apache.kafka.streams.kstream.*;
 import org.apache.kafka.streams.processor.WallclockTimestampExtractor;
@@ -48,6 +45,9 @@ public class KafkaStreamsConfiguration {
     public KafkaStreams kafkaStreams() {
         final StreamsBuilder builder = new StreamsBuilder();
 
+//        Topology topology = new Topology();
+//        topology.addSource("name", )
+
         final Consumed<String, Metric> consumedAsMetric = getStringMetricConsumed();
         final Produced<String, RolledUp> producedAsMetricRolledUp = getStringRolledUpProduced();
 
@@ -72,26 +72,12 @@ public class KafkaStreamsConfiguration {
                         new RolledUp(windowedKey.key(), windowedKey.window().start(),
                                 windowedKey.window().end(), value)));
 
-        rolledUpData.foreach((key, value) -> {
-            System.out.println(String.format("key=%s;start=%s;end=%s", value.key, value.start, value.end));
-            for(String key2 : value.ivalues.keySet()){
-                System.out.println(String.format("%s=%s", key2, value.ivalues.get(key2)));
-            }
-        });
-
-//        timeWindowedAggregatedStream.toStream()
-//                .foreach(new ForeachAction<Windowed<String>, Metric.Values>() {
-//                    @Override
-//                    public void apply(Windowed<String> stringWindowed, Metric.Values values) {
-//                        System.out.println(String.format("key=%s", stringWindowed.key()));
-//                        System.out.println(String.format("start=%s", stringWindowed.window().start()));
-//                        System.out.println(String.format("end=%s", stringWindowed.window().end()));
-//
-//                        for(String key : values.ivalues.keySet()){
-//                            System.out.println(String.format("%s=%s", key, values.ivalues.get(key)));
-//                        }
-//                    }
-//                });
+//        rolledUpData.foreach((key, value) -> {
+//            System.out.println(String.format("key=%s;start=%s;end=%s", value.key, value.start, value.end));
+//            for(String key2 : value.ivalues.keySet()){
+//                System.out.println(String.format("%s=%s", key2, value.ivalues.get(key2)));
+//            }
+//        });
 
         rolledUpData.to("mrit-stream-output-topic", producedAsMetricRolledUp);
 
