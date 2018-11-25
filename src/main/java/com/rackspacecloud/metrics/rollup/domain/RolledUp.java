@@ -84,6 +84,8 @@ public class RolledUp {
     }
 
     private void calculateMeanForIValues(Metric metric) {
+        if(metric.iValuesForRollup == null) return; // TODO: what to do here? Dig it further.
+
         // Process all collected iValues
         metric.iValuesForRollup.forEach((k, v) -> {
             int dataPointCount = v.size();
@@ -111,6 +113,8 @@ public class RolledUp {
     }
 
     private void calculateMeanForFValues(Metric metric) {
+        if(metric.fValuesForRollup == null) return; // TODO: what to do here? Dig it further.
+
         // Process all collected fValues
         metric.fValuesForRollup.forEach((k, v) -> {
             int dataPointCount = v.size();
