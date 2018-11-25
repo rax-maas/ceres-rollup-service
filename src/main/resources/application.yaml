@@ -27,8 +27,8 @@ kafka:
     state-dir-config: "/tmp/kafka-streams" # ${STATE_DIR_CONFIG}
 
     aggregation:
-      window-size-in-minutes: 1   # tumbling window size for aggregation
-      window-retention-period-in-minutes: 2 # for late arrival of records
+      window-size-in-minutes: 5   # tumbling window size for aggregation
+      window-retention-period-in-minutes: 10 # for late arrival of records
 
 logging:
   level:

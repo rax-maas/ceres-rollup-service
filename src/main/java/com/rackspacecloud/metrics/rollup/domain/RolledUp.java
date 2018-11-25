@@ -100,7 +100,7 @@ public class RolledUp {
 
                 Long sum = 0L;
 
-                for (int i = 1; i < dataPointCount; i++) {
+                for (int i = 0; i < dataPointCount; i++) {
                     Long currentValue = v.get(i);
                     if(currentValue < rollupBucket.min) rollupBucket.min = currentValue;
                     if(currentValue > rollupBucket.max) rollupBucket.max = currentValue;
@@ -129,7 +129,7 @@ public class RolledUp {
 
                 Double sum = 0D;
 
-                for (int i = 1; i < dataPointCount; i++) {
+                for (int i = 0; i < dataPointCount; i++) {
                     Double currentValue = v.get(i);
                     if(currentValue < rollupBucket.min) rollupBucket.min = currentValue;
                     if(currentValue > rollupBucket.max) rollupBucket.max = currentValue;

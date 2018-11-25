@@ -1,5 +1,7 @@
 package com.rackspacecloud.metrics.rollup.config;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rackspacecloud.metrics.rollup.domain.Metric;
 import com.rackspacecloud.metrics.rollup.domain.RolledUp;
 import com.rackspacecloud.metrics.rollup.serdes.JsonPOJODeserializer;
@@ -97,14 +99,18 @@ public class KafkaStreamsConfiguration {
         Topology topology = builder.build();
 //        System.out.println(topology.describe());
 
-//        rolledUpData.foreach((key, value) -> {
-//            System.out.println(String.format("key=%s;start=%s;end=%s", value.key, value.start, value.end));
-//            for(String key2 : value.ivalues.keySet()){
-//                System.out.println(String.format("%s=%s", key2, value.ivalues.get(key2)));
-//            }
-//        });
+        rolledUpData.foreach((key, value) -> {
+            ObjectMapper mapper = new ObjectMapper();
+            try {
+                String valueAsString = mapper.writeValueAsString(value);
+                System.out.println(valueAsString);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+        });
 
-        rolledUpData.to(configProps.getTopics().getOut(), producedAsMetricRolledUp);
+
+//        rolledUpData.to(configProps.getTopics().getOut(), producedAsMetricRolledUp);
 
         final KafkaStreams streams = new KafkaStreams(topology, getStreamsConfiguration());
 
@@ -115,13 +121,13 @@ public class KafkaStreamsConfiguration {
         long retentionPeriod = configProps.getStreams().getAggregation().getWindowRetentionPeriodInMinutes();
         long windowSize = configProps.getStreams().getAggregation().getWindowSizeInMinutes();
 
-//        TimeWindows timeWindows = TimeWindows
-//                .of(TimeUnit.MINUTES.toMillis(windowSize))
-//                .until(TimeUnit.MINUTES.toMillis(retentionPeriod));
-
         TimeWindows timeWindows = TimeWindows
-                .of(TimeUnit.SECONDS.toMillis(10));
-//                .until(TimeUnit.MINUTES.toMillis(retentionPeriod));
+                .of(TimeUnit.MINUTES.toMillis(windowSize))
+                .until(TimeUnit.MINUTES.toMillis(retentionPeriod));
+
+//        TimeWindows timeWindows = TimeWindows
+//                .of(TimeUnit.SECONDS.toMillis(10));
+////                .until(TimeUnit.MINUTES.toMillis(retentionPeriod));
 
         // Aggregating with time-based windowing (tumbling windows)
         return groupedStream.windowedBy(timeWindows).reduce((aggValue, newValue) -> aggValue.reduce(newValue));
