@@ -17,18 +17,26 @@ kafka:
 
   topics:
     in: unified.metrics.json
-    out: unified.metrics.json.5m
+    out-level-1: unified.metrics.json.5m
+    out-level-2: unified.metrics.json.20m
+    out-level-3: unified.metrics.json.60m
+    out-level-4: unified.metrics.json.240m
+    out-level-5: unified.metrics.json.1440M
 
   consumer:
     auto-offset-reset-config: "earliest"
 
   streams:
-    application-id-config: "rollup-1m" # ${APPLICATION_ID_CONFIG}
+    application-id-config: "rollup" # ${APPLICATION_ID_CONFIG}
     state-dir-config: "/tmp/kafka-streams" # ${STATE_DIR_CONFIG}
 
     aggregation:
-      window-size-in-minutes: 5   # tumbling window size for aggregation
-      window-retention-period-in-minutes: 10 # for late arrival of records
+      window-size-in-minutes-level-1: 5     # tumbling window size for aggregation
+      window-size-in-minutes-level-2: 20
+      window-size-in-minutes-level-3: 60
+      window-size-in-minutes-level-4: 240
+      window-size-in-minutes-level-5: 1440
+      late-arrival-in-minutes: 4            # for late arrival of records
 
 logging:
   level:
@@ -40,7 +48,7 @@ spring:
   profiles: production
 
 kafka:
-  servers: ${KAFKA_SERVERS_TEST}
+  servers: ${KAFKA_SERVERS}
 
   ssl:
     truststore-location: ${TRUSTSTORE_LOCATION}
@@ -53,7 +61,11 @@ kafka:
 
   topics:
     in: unified.metrics.json
-    out: unified.metrics.json.5m
+    out-level-1: unified.metrics.json.5m
+    out-level-2: unified.metrics.json.20m
+    out-level-3: unified.metrics.json.60m
+    out-level-4: unified.metrics.json.240m
+    out-level-5: unified.metrics.json.1440M
 
   consumer:
     auto-offset-reset-config: "earliest"
@@ -63,5 +75,9 @@ kafka:
     state-dir-config: "/tmp/kafka-streams" # ${STATE_DIR_CONFIG}
 
     aggregation:
-      window-size-in-minutes: 2   # tumbling window size for aggregation
-      window-retention-period-in-minutes: 10 # for late arrival of records
+      window-size-in-minutes-level-1: 5     # tumbling window size for aggregation
+      window-size-in-minutes-level-2: 20
+      window-size-in-minutes-level-3: 60
+      window-size-in-minutes-level-4: 240
+      window-size-in-minutes-level-5: 1440
+      late-arrival-in-minutes: 4            # for late arrival of records

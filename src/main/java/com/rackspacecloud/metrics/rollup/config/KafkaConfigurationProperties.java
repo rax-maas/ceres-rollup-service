@@ -125,7 +125,51 @@ public class KafkaConfigurationProperties {
 
     public static class Topics {
         private String in;
-        private String out;
+        private String outLevel1;
+        private String outLevel2;
+        private String outLevel3;
+        private String outLevel4;
+        private String outLevel5;
+
+        public String getOutLevel1() {
+            return outLevel1;
+        }
+
+        public void setOutLevel1(String outLevel1) {
+            this.outLevel1 = outLevel1;
+        }
+
+        public String getOutLevel2() {
+            return outLevel2;
+        }
+
+        public void setOutLevel2(String outLevel2) {
+            this.outLevel2 = outLevel2;
+        }
+
+        public String getOutLevel3() {
+            return outLevel3;
+        }
+
+        public void setOutLevel3(String outLevel3) {
+            this.outLevel3 = outLevel3;
+        }
+
+        public String getOutLevel4() {
+            return outLevel4;
+        }
+
+        public void setOutLevel4(String outLevel4) {
+            this.outLevel4 = outLevel4;
+        }
+
+        public String getOutLevel5() {
+            return outLevel5;
+        }
+
+        public void setOutLevel5(String outLevel5) {
+            this.outLevel5 = outLevel5;
+        }
 
         public String getIn() {
             return in;
@@ -133,14 +177,6 @@ public class KafkaConfigurationProperties {
 
         public void setIn(String in) {
             this.in = in;
-        }
-
-        public String getOut() {
-            return out;
-        }
-
-        public void setOut(String out) {
-            this.out = out;
         }
     }
 
@@ -171,23 +207,59 @@ public class KafkaConfigurationProperties {
         }
 
         public static class Aggregation {
-            private int windowSizeInMinutes;
-            private int windowRetentionPeriodInMinutes;
+            private int lateArrivalInMinutes;
+            private int windowSizeInMinutesLevel1;
+            private int windowSizeInMinutesLevel2;
+            private int windowSizeInMinutesLevel3;
+            private int windowSizeInMinutesLevel4;
+            private int windowSizeInMinutesLevel5;
 
-            public int getWindowSizeInMinutes() {
-                return windowSizeInMinutes;
+            public int getWindowSizeInMinutesLevel1() {
+                return windowSizeInMinutesLevel1;
             }
 
-            public void setWindowSizeInMinutes(int windowSizeInMinutes) {
-                this.windowSizeInMinutes = windowSizeInMinutes;
+            public void setWindowSizeInMinutesLevel1(int windowSizeInMinutesLevel1) {
+                this.windowSizeInMinutesLevel1 = windowSizeInMinutesLevel1;
             }
 
-            public int getWindowRetentionPeriodInMinutes() {
-                return windowRetentionPeriodInMinutes;
+            public int getWindowSizeInMinutesLevel2() {
+                return windowSizeInMinutesLevel2;
             }
 
-            public void setWindowRetentionPeriodInMinutes(int windowRetentionPeriodInMinutes) {
-                this.windowRetentionPeriodInMinutes = windowRetentionPeriodInMinutes;
+            public void setWindowSizeInMinutesLevel2(int windowSizeInMinutesLevel2) {
+                this.windowSizeInMinutesLevel2 = windowSizeInMinutesLevel2;
+            }
+
+            public int getWindowSizeInMinutesLevel3() {
+                return windowSizeInMinutesLevel3;
+            }
+
+            public void setWindowSizeInMinutesLevel3(int windowSizeInMinutesLevel3) {
+                this.windowSizeInMinutesLevel3 = windowSizeInMinutesLevel3;
+            }
+
+            public int getWindowSizeInMinutesLevel4() {
+                return windowSizeInMinutesLevel4;
+            }
+
+            public void setWindowSizeInMinutesLevel4(int windowSizeInMinutesLevel4) {
+                this.windowSizeInMinutesLevel4 = windowSizeInMinutesLevel4;
+            }
+
+            public int getWindowSizeInMinutesLevel5() {
+                return windowSizeInMinutesLevel5;
+            }
+
+            public void setWindowSizeInMinutesLevel5(int windowSizeInMinutesLevel5) {
+                this.windowSizeInMinutesLevel5 = windowSizeInMinutesLevel5;
+            }
+
+            public int getLateArrivalInMinutes() {
+                return lateArrivalInMinutes;
+            }
+
+            public void setLateArrivalInMinutes(int lateArrivalInMinutes) {
+                this.lateArrivalInMinutes = lateArrivalInMinutes;
             }
         }
     }
