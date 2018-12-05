@@ -37,7 +37,7 @@ public class KafkaStreamsConfiguration {
     @Bean
     @Profile("development")
     KafkaStreams devKafkaStreams() {
-        setStreamsConfiguration(false);
+        setStreamsConfiguration(true);
         final KafkaStreams streams = new KafkaStreams(topology, config);
 
         return streams;
@@ -60,22 +60,19 @@ public class KafkaStreamsConfiguration {
         config.put(SslConfigs.SSL_KEYSTORE_LOCATION_CONFIG, configProps.getSsl().getKeystoreLocation());
         config.put(SslConfigs.SSL_KEYSTORE_PASSWORD_CONFIG, configProps.getSsl().getKeystorePassword());
         config.put(SslConfigs.SSL_KEY_PASSWORD_CONFIG, configProps.getSsl().getKeyPassword());
-        config.put(SslConfigs.SSL_ENDPOINT_IDENTIFICATION_ALGORITHM_CONFIG, "");
+        config.put(SslConfigs.SSL_ENDPOINT_IDENTIFICATION_ALGORITHM_CONFIG,
+                configProps.getSsl().getEndpointIdentificationAlgorithm());
     }
 
     private void setStreamsConfiguration(boolean setSslProperties) {
         setStreamsConfig();
         config.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, configProps.getConsumer().getAutoOffsetResetConfig());
 
-//        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, configProps.getServers());
-//        config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-//        config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-
         if(setSslProperties) setSslProperties();
     }
 
     private void setStreamsConfig() {
-        config.put(StreamsConfig.APPLICATION_ID_CONFIG, configProps.getStreams().getApplicationIdConfig());
+        config.put(StreamsConfig.APPLICATION_ID_CONFIG, configProps.getStreams().getApplicationId());
         config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, configProps.getServers());
         config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
         config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
@@ -83,5 +80,7 @@ public class KafkaStreamsConfiguration {
         config.put(StreamsConfig.STATE_DIR_CONFIG, configProps.getStreams().getStateDirConfig());
         config.put(StreamsConfig.DEFAULT_DESERIALIZATION_EXCEPTION_HANDLER_CLASS_CONFIG,
                 LogAndContinueExceptionHandler.class.getName());
+
+        config.put(StreamsConfig.REQUEST_TIMEOUT_MS_CONFIG, configProps.getStreams().getRequestTimeoutMs());
     }
 }

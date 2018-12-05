@@ -1,10 +1,12 @@
-
+spring:
+  application:
+    name: rollup-unified-metrics
 ---
 spring:
   profiles: development
 
 kafka:
-  servers: ${KAFKA_SERVERS_TEST}
+  servers: ${KAFKA_SERVERS} #${TEST_KAFKA_SERVERS}
 
   ssl:
     truststore-location: ${TRUSTSTORE_LOCATION}
@@ -12,6 +14,7 @@ kafka:
     keystore-location: ${KEYSTORE_LOCATION}
     keystore-password: ${KEYSTORE_PASSWORD}
     key-password: ${KEY_PASSWORD}
+    endpoint-identification-algorithm: ""
   properties:
     security-protocol: SSL
 
@@ -21,14 +24,15 @@ kafka:
     out-level-2: unified.metrics.json.20m
     out-level-3: unified.metrics.json.60m
     out-level-4: unified.metrics.json.240m
-    out-level-5: unified.metrics.json.1440M
+    out-level-5: unified.metrics.json.1440m
 
   consumer:
     auto-offset-reset-config: "earliest"
 
   streams:
-    application-id-config: "rollup" # ${APPLICATION_ID_CONFIG}
+    application-id: "rollup" # ${APPLICATION_ID_CONFIG}
     state-dir-config: "/tmp/kafka-streams" # ${STATE_DIR_CONFIG}
+    request-timeout-ms: 60000
 
     aggregation:
       window-size-in-minutes-level-1: 5     # tumbling window size for aggregation
@@ -40,6 +44,7 @@ kafka:
 
 logging:
   level:
+    log4j.logger.org.apache.kafka.streams.KafkaStreams: DEBUG
     com.rackspacecloud: debug
     org.springframework:
       kafka: debug
@@ -56,6 +61,7 @@ kafka:
     keystore-location: ${KEYSTORE_LOCATION}
     keystore-password: ${KEYSTORE_PASSWORD}
     key-password: ${KEY_PASSWORD}
+    endpoint-identification-algorithm: ""
   properties:
     security-protocol: SSL
 
@@ -65,13 +71,13 @@ kafka:
     out-level-2: unified.metrics.json.20m
     out-level-3: unified.metrics.json.60m
     out-level-4: unified.metrics.json.240m
-    out-level-5: unified.metrics.json.1440M
+    out-level-5: unified.metrics.json.1440m
 
   consumer:
-    auto-offset-reset-config: "earliest"
+    auto-offset-reset-config: "latest"
 
   streams:
-    application-id-config: "rollup-1m" # ${APPLICATION_ID_CONFIG}
+    application-id: "rollup" # ${APPLICATION_ID_CONFIG}
     state-dir-config: "/tmp/kafka-streams" # ${STATE_DIR_CONFIG}
 
     aggregation:

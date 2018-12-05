@@ -109,6 +109,16 @@ public class KafkaConfigurationProperties {
         public void setKeyPassword(String keyPassword){
             this.keyPassword = keyPassword;
         }
+
+        private String endpointIdentificationAlgorithm;
+
+        public String getEndpointIdentificationAlgorithm() {
+            return endpointIdentificationAlgorithm;
+        }
+
+        public void setEndpointIdentificationAlgorithm(String endpointIdentificationAlgorithm) {
+            this.endpointIdentificationAlgorithm = endpointIdentificationAlgorithm;
+        }
     }
 
     public static class Properties{
@@ -181,15 +191,24 @@ public class KafkaConfigurationProperties {
     }
 
     public static class Streams {
-        private String applicationIdConfig;
+        private String applicationId;
         private String stateDirConfig;
+        private int requestTimeoutMs;
 
-        public String getApplicationIdConfig() {
-            return applicationIdConfig;
+        public int getRequestTimeoutMs() {
+            return requestTimeoutMs;
         }
 
-        public void setApplicationIdConfig(String applicationIdConfig) {
-            this.applicationIdConfig = applicationIdConfig;
+        public void setRequestTimeoutMs(int requestTimeoutMs) {
+            this.requestTimeoutMs = requestTimeoutMs;
+        }
+
+        public String getApplicationId() {
+            return applicationId;
+        }
+
+        public void setApplicationId(String applicationId) {
+            this.applicationId = applicationId;
         }
 
         public String getStateDirConfig() {

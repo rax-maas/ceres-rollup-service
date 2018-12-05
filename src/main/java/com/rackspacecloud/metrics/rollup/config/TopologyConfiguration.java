@@ -117,10 +117,6 @@ public class TopologyConfiguration {
                 .of(TimeUnit.MINUTES.toMillis(windowSize))
                 .until(TimeUnit.MINUTES.toMillis(retentionPeriod));
 
-//        TimeWindows timeWindows = TimeWindows
-//                .of(TimeUnit.SECONDS.toMillis(10));
-////                .until(TimeUnit.MINUTES.toMillis(retentionPeriod));
-
         // Aggregating with time-based windowing (tumbling windows)
         return groupedStream.windowedBy(timeWindows).reduce((aggValue, newValue) -> aggValue.reduce(newValue));
     }
