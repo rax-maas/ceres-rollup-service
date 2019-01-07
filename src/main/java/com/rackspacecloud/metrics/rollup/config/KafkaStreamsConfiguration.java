@@ -37,7 +37,7 @@ public class KafkaStreamsConfiguration {
     @Bean
     @Profile("development")
     KafkaStreams devKafkaStreams() {
-        setStreamsConfiguration(true);
+        setStreamsConfiguration(false);
         final KafkaStreams streams = new KafkaStreams(topology, config);
 
         return streams;

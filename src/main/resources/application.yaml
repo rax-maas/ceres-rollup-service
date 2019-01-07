@@ -6,7 +6,7 @@ spring:
   profiles: development
 
 kafka:
-  servers: ${KAFKA_SERVERS} #${TEST_KAFKA_SERVERS}
+  servers: ${TEST_KAFKA_SERVERS} #${KAFKA_SERVERS}
 
   ssl:
     truststore-location: ${TRUSTSTORE_LOCATION}
