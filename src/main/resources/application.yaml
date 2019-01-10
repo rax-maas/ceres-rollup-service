@@ -1,6 +1,37 @@
 spring:
   application:
     name: rollup-unified-metrics
+
+---
+spring:
+  profiles: test
+
+kafka:
+  servers: ${spring.embedded.kafka.brokers}
+
+  topics:
+    in: unified.metrics.json
+    out-level-1: unified.metrics.json.5m
+
+  consumer:
+    auto-offset-reset-config: "earliest"
+
+  streams:
+    application-id: "rollup" # ${APPLICATION_ID_CONFIG}
+    state-dir-config: "/tmp/kafka-streams" # ${STATE_DIR_CONFIG}
+    request-timeout-ms: 60000
+
+    aggregation:
+      window-size-in-minutes-level-1: 5     # tumbling window size for aggregation
+      late-arrival-in-minutes: 0            # for late arrival of records
+
+logging:
+  level:
+    log4j.logger.org.apache.kafka.streams.KafkaStreams: DEBUG
+    com.rackspacecloud: debug
+    org.springframework:
+      kafka: debug
+
 ---
 spring:
   profiles: development

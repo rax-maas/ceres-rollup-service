@@ -60,20 +60,28 @@ public class TopologyConfiguration {
                 producedAsMetricRolledUp, groupedStream, lateArrivalInMinutes, windowSizeLevel1);
 
         long windowSizeLevel2 = configProps.getStreams().getAggregation().getWindowSizeInMinutesLevel2();
-        rollupForGivenWindowSize(configProps.getTopics().getOutLevel2(),
-                producedAsMetricRolledUp, groupedStream, lateArrivalInMinutes, windowSizeLevel2);
+        if(windowSizeLevel2 > 0) {
+            rollupForGivenWindowSize(configProps.getTopics().getOutLevel2(),
+                    producedAsMetricRolledUp, groupedStream, lateArrivalInMinutes, windowSizeLevel2);
+        }
 
         long windowSizeLevel3 = configProps.getStreams().getAggregation().getWindowSizeInMinutesLevel3();
-        rollupForGivenWindowSize(configProps.getTopics().getOutLevel3(),
-                producedAsMetricRolledUp, groupedStream, lateArrivalInMinutes, windowSizeLevel3);
+        if(windowSizeLevel3 > 0) {
+            rollupForGivenWindowSize(configProps.getTopics().getOutLevel3(),
+                    producedAsMetricRolledUp, groupedStream, lateArrivalInMinutes, windowSizeLevel3);
+        }
 
         long windowSizeLevel4 = configProps.getStreams().getAggregation().getWindowSizeInMinutesLevel4();
-        rollupForGivenWindowSize(configProps.getTopics().getOutLevel4(),
-                producedAsMetricRolledUp, groupedStream, lateArrivalInMinutes, windowSizeLevel4);
+        if(windowSizeLevel4 > 0) {
+            rollupForGivenWindowSize(configProps.getTopics().getOutLevel4(),
+                    producedAsMetricRolledUp, groupedStream, lateArrivalInMinutes, windowSizeLevel4);
+        }
 
         long windowSizeLevel5 = configProps.getStreams().getAggregation().getWindowSizeInMinutesLevel5();
-        rollupForGivenWindowSize(configProps.getTopics().getOutLevel5(),
-                producedAsMetricRolledUp, groupedStream, lateArrivalInMinutes, windowSizeLevel5);
+        if(windowSizeLevel5 > 0) {
+            rollupForGivenWindowSize(configProps.getTopics().getOutLevel5(),
+                    producedAsMetricRolledUp, groupedStream, lateArrivalInMinutes, windowSizeLevel5);
+        }
 
         Topology topology = builder.build();
 

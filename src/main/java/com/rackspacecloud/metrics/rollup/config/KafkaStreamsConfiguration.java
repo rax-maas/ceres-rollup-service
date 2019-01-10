@@ -44,6 +44,15 @@ public class KafkaStreamsConfiguration {
     }
 
     @Bean
+    @Profile("test")
+    KafkaStreams testKafkaStreams() {
+        setStreamsConfiguration(false);
+        final KafkaStreams streams = new KafkaStreams(topology, config);
+
+        return streams;
+    }
+
+    @Bean
     @Profile("production")
     KafkaStreams prodKafkaStreams() {
         setStreamsConfiguration(true);

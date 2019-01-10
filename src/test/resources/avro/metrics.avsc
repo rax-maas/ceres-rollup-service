@@ -1,0 +1,113 @@
+{
+  "type": "record",
+  "name": "Metric",
+  "namespace": "com.rackspace.maas.model",
+  "fields": [
+    {
+      "name": "timestamp",
+      "type": "string",
+      "doc": "ISO 8601 formatted date/time of when the metric was collected, such as 2018-03-27T13:15:06.497Z"
+    },
+    {
+      "name": "accountType",
+      "type": {
+        "name": "AccountType",
+        "type": "enum",
+        "default": "UNKOWN",
+        "symbols": [
+          "UNKOWN",
+          "CORE",
+          "ENCORE"
+        ]
+      }
+    },
+    {
+      "name": "account",
+      "type": "string"
+    },
+    {
+      "name": "device",
+      "type": "string"
+    },
+    {
+      "name": "deviceLabel",
+      "type": "string"
+    },
+    {
+      "name": "deviceMetadata",
+      "type": {
+        "name": "DeviceMetadata",
+        "type": "map",
+        "values": "string"
+      }
+    },
+    {
+      "name": "monitoringSystem",
+      "doc": "The monitoring system that originated these metrics",
+      "type": {
+        "name": "MonitoringSystem",
+        "type": "enum",
+        "symbols": [
+          "MAAS",
+          "UIM"
+        ]
+      }
+    },
+    {
+      "name": "systemMetadata",
+      "type": {
+        "name": "SystemMetadata",
+        "type": "map",
+        "values": "string"
+      }
+    },
+    {
+      "name": "collectionLabel",
+      "type": "string"
+    },
+    {
+      "name": "collectionTarget",
+      "type": "string"
+    },
+    {
+      "name": "collectionMetadata",
+      "type": {
+        "name": "CollectionMetadata",
+        "type": "map",
+        "values": "string"
+      }
+    },
+    {
+      "name": "ivalues",
+      "type": {
+        "name": "IntegerValues",
+        "type": "map",
+        "values": "long"
+      }
+    },
+    {
+      "name": "fvalues",
+      "type": {
+        "name": "FloatValues",
+        "type": "map",
+        "values": "double"
+      }
+    },
+    {
+      "name": "svalues",
+      "type": {
+        "name": "StringValues",
+        "type": "map",
+        "values": "string"
+      }
+    },
+    {
+      "name": "units",
+      "type": {
+        "name": "Units",
+        "type": "map",
+        "values": "string"
+      }
+    }
+  ]
+}
