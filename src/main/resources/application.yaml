@@ -45,7 +45,7 @@ spring:
   profiles: development
 
 kafka:
-  servers: ${TEST_KAFKA_SERVERS} #${KAFKA_SERVERS}
+  servers: ${TEST_KAFKA_BOOTSTRAP_SERVERS}
 
   ssl:
     truststore-location: ${TRUSTSTORE_LOCATION}
@@ -92,7 +92,7 @@ spring:
   profiles: production
 
 kafka:
-  servers: ${KAFKA_SERVERS}
+  servers: ${KAFKA_BOOTSTRAP_SERVERS}
 
   ssl:
     truststore-location: ${TRUSTSTORE_LOCATION}

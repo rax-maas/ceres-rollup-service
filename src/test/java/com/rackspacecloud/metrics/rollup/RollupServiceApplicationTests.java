@@ -35,7 +35,7 @@ import java.util.Map;
         "${kafka.topics.in}",
         "${kafka.topics.out-level-1}"
 })
-public class RollupApplicationTests {
+public class RollupServiceApplicationTests {
 
     @Autowired
     KafkaEmbedded embeddedKafka;
@@ -63,7 +63,7 @@ public class RollupApplicationTests {
         kafkaStreams.cleanUp();
         kafkaStreams.start();
 
-        sendBatchesOfMessages(sender, 10, 5);
+        sendBatchesOfMessages(sender, 2, 5);
 
         Thread.sleep(10*1000L); // wait for a few sec for consumer to process some records
 

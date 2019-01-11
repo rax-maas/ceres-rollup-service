@@ -7,11 +7,11 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
-public class RollupApplication {
+public class RollupServiceApplication {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context =
-				new SpringApplicationBuilder(RollupApplication.class)
+				new SpringApplicationBuilder(RollupServiceApplication.class)
 						.web(WebApplicationType.NONE)
 						.run(args);
 
