@@ -105,7 +105,8 @@ public class RollupApplicationTests {
      */
     private void runRollupForUniqueTagSets(Sender testBean, int uniqueTagSets) {
         for (int i = 0; i < uniqueTagSets; i++) {
-            Metric metric = MockMetricHelper.getValidMetric(i, "hybrid:1667601", true);
+            Metric metric =
+                    MockMetricHelper.getValidMetric(i, "hybrid:1667601", true, true);
             testBean.send(metric, topicIn);
         }
     }

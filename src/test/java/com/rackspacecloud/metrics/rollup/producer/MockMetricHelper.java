@@ -11,7 +11,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class MockMetricHelper {
 
-    public static Metric getValidMetric(int i, String tenantId, boolean wantIValues){
+    public static Metric getValidMetric(int i, String tenantId, boolean wantIValues, boolean wantFValues){
         Metric metric = new Metric();
 
         metric.setAccount("1234567");
@@ -43,12 +43,14 @@ public class MockMetricHelper {
         metric.setCollectionMetadata(collectionMetadata);
 
         Map<String, Long> iValues = new HashMap<>();
+        Map<String, Double> fValues = new HashMap<>();
 
         if(wantIValues) iValues = getIValues();
+        if(wantFValues) fValues = getFValues();
 
         metric.setIvalues(iValues);
+        metric.setFvalues(fValues);
 
-        metric.setFvalues(new HashMap<>());
         metric.setSvalues(new HashMap<>());
 
         Map<String, String> units = new HashMap<>();
@@ -76,8 +78,22 @@ public class MockMetricHelper {
         return iValues;
     }
 
+    private static Map<String, Double> getFValues() {
+        Map<String, Double> fValues = new HashMap<>();
+        fValues.put("dummy_fValue1", getNextDoubleValue());
+        fValues.put("dummy_fValue2", getNextDoubleValue());
+        fValues.put("dummy_fValue3", getNextDoubleValue());
+        return fValues;
+    }
+
     private static long getNextLongValue() {
         return ThreadLocalRandom.current().nextLong(1000L, 50_000L);
+    }
+
+    private static double getNextDoubleValue() {
+        int min = 20;
+        int max = 90;
+        return (min + (max - min) * ThreadLocalRandom.current().nextDouble());
     }
 
 }
