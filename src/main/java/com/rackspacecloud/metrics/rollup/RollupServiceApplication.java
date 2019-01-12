@@ -12,7 +12,7 @@ public class RollupServiceApplication {
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context =
 				new SpringApplicationBuilder(RollupServiceApplication.class)
-						.web(WebApplicationType.NONE)
+						.web(WebApplicationType.SERVLET)
 						.run(args);
 
 		KafkaStreams kafkaStreams = context.getBean(KafkaStreams.class);
