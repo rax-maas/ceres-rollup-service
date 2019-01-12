@@ -118,6 +118,7 @@ kafka:
   streams:
     application-id: "rollup" # ${APPLICATION_ID_CONFIG}
     state-dir-config: "/tmp/kafka-streams" # ${STATE_DIR_CONFIG}
+    request-timeout-ms: 60000
 
     aggregation:
       window-size-in-minutes-level-1: 5     # tumbling window size for aggregation
@@ -126,3 +127,10 @@ kafka:
       window-size-in-minutes-level-4: 240
       window-size-in-minutes-level-5: 1440
       late-arrival-in-minutes: 4            # for late arrival of records
+
+logging:
+  level:
+    log4j.logger.org.apache.kafka.streams.KafkaStreams: info
+    com.rackspacecloud: info
+    org.springframework:
+      kafka: info
