@@ -87,6 +87,21 @@ logging:
     com.rackspacecloud: debug
     org.springframework:
       kafka: debug
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,jolokia,metrics"
+  metrics:
+    tags:
+      stack: "dev"
+    export:
+      influx:
+        db: ceres
+        uri: http://localhost:8086
+        auto-create-db: true
+
 ---
 spring:
   profiles: production
@@ -134,3 +149,17 @@ logging:
     com.rackspacecloud: info
     org.springframework:
       kafka: info
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,jolokia,metrics"
+  metrics:
+    tags:
+      stack: "prod"
+    export:
+      influx:
+        db: ceres
+        uri: http://data-influxdb:8086
+        auto-create-db: true
