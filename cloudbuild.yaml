@@ -5,3 +5,5 @@ steps:
 
 images:
   - 'gcr.io/ceres-dev-222017/metrics-rollup-service'
+  - 'gcr.io/ceres-dev-222017/metrics-rollup-service:$BRANCH_NAME'
+  - 'gcr.io/ceres-dev-222017/metrics-rollup-service:$SHORT_SHA'
