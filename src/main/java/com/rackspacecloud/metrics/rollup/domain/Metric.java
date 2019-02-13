@@ -1,10 +1,13 @@
 package com.rackspacecloud.metrics.rollup.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Metric implements IReducer<Metric> {
     public String rollupKey;
 
@@ -31,6 +34,10 @@ public class Metric implements IReducer<Metric> {
     public Map<String, String> svalues;
     public Map<String, String> units;
 
+    /**
+     * Define the rollup-key that is used to aggregate the data.
+     * @return rollup-key
+     */
     @Override
     public String getRollupKey(){
         StringBuilder sb = new StringBuilder();
