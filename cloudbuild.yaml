@@ -3,7 +3,15 @@ steps:
     id: DEPLOY
     args: ['-Ddocker.image.prefix=gcr.io/ceres-dev-222017', 'package', 'jib:dockerBuild']
 
+# Tagging the image for a more specific image can be used
+  - name: 'gcr.io/cloud-builders/docker'
+    id: TAG_IMAGE_WITH_BRANCH_NAME
+    args: ['tag', 'gcr.io/ceres-dev-222017/metrics-ingestion-service:latest', 'gcr.io/ceres-dev-222017/metrics-ingestion-service:$BRANCH_NAME']
+  - name: 'gcr.io/cloud-builders/docker'
+    id: TAG_IMAGE_WITH_SHORT_SHA
+    args: ['tag', 'gcr.io/ceres-dev-222017/metrics-ingestion-service:latest', 'gcr.io/ceres-dev-222017/metrics-ingestion-service:$SHORT_SHA']
+
 images:
-  - 'gcr.io/ceres-dev-222017/metrics-rollup-service'
-  - 'gcr.io/ceres-dev-222017/metrics-rollup-service:$BRANCH_NAME'
-  - 'gcr.io/ceres-dev-222017/metrics-rollup-service:$SHORT_SHA'
+  - 'gcr.io/ceres-dev-222017/metrics-ingestion-service'
+  - 'gcr.io/ceres-dev-222017/metrics-ingestion-service:$BRANCH_NAME'
+  - 'gcr.io/ceres-dev-222017/metrics-ingestion-service:$SHORT_SHA'
