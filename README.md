@@ -1,5 +1,5 @@
 # Rollup Service
-This service aggregates raw data into multiple rolled-up topics. It consumes raw data from one topic and produces aggregated data into multiple topics depending on what all aggregation levels are configured.
+We are using Kafka to do aggregation (rollup) of raw data. This service aggregates raw data into multiple rolled-up topics. It consumes raw data from one topic and produces aggregated data into multiple topics depending on what all aggregation levels are configured.
 
 ## Setup
 Install docker. Once done with that, you can use [`test-infrastructure`](https://github.com/racker/ceres-test-infrastructure) repository to install and run `Kafka`, `InfluxDB` and `Redis`. Please follow instruction from that repository to install them. Rollup service needs `Kafka` only. <br />
