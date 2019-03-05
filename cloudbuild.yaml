@@ -75,4 +75,3 @@ steps:
     volumes:
     - name: user.home
       path: /root
-
