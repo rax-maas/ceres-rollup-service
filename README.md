@@ -8,6 +8,6 @@ Ideally we should have all of these components in `docker-compose`, but for now,
 To run or test Rollup Service locally:
 - Get repo `ingestion-service-functional-test` and after building it. 
   - Go to `ingestion-service-functional-test` folder locally
-  - Run `java -jar target/kafka-influxdb-functional-test-0.0.1-SNAPSHOT.jar` This will create raw test data into Kafka.
+  - Run `java -jar target/ingestion-service-functional-test-0.0.1-SNAPSHOT.jar` This will create raw test data into Kafka.
   <br />
   Now you can run rollup-service using IntelliJ to do your development work.
