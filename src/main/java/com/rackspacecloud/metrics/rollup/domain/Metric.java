@@ -1,6 +1,7 @@
 package com.rackspacecloud.metrics.rollup.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,25 +9,25 @@ import java.util.List;
 import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Data
 public class Metric implements IReducer<Metric> {
     public String rollupKey;
 
     public Map<String, List<Long>> iValuesForRollup;
     public Map<String, List<Double>> fValuesForRollup;
 
-    public String timestamp;
-
     // InfluxDB tags
-    public AccountType accountType;
-    public String account;
-    public String device;
-    public String deviceLabel;
-    public Map<String, String> deviceMetadata;
-    public MonitoringSystem monitoringSystem;
-    public Map<String, String> systemMetadata;
-    public String collectionLabel;
-    public String collectionTarget;
-    public Map<String, String> collectionMetadata;
+    String accountType;
+    String account;
+    String device;
+    String deviceLabel;
+    Map<String, String> deviceMetadata;
+    String monitoringSystem;
+    Map<String, String> systemMetadata;
+    String collectionName;
+    String collectionLabel;
+    String collectionTarget;
+    Map<String, String> collectionMetadata;
 
     // InfluxDB fields
     public Map<String, Long> ivalues;
@@ -39,24 +40,17 @@ public class Metric implements IReducer<Metric> {
      * @return rollup-key
      */
     @Override
-    public String getRollupKey(){
-        StringBuilder sb = new StringBuilder();
-        sb.append(String.format("%s", getSystemMetadata()));
-        this.rollupKey = sb.toString();
+    public String getRollupKey() {
+        String[] rollupKeyTags = new String[] {
+                accountType, account, monitoringSystem, collectionName,
+                device, deviceLabel, collectionLabel
+        };
+
+        this.rollupKey = String.join(".", rollupKeyTags);
 
         // TODO: Check what else needs to be part of the rollup key
 
-        return rollupKey;
-    }
-
-    private String getSystemMetadata(){
-        return String.format("%s.%s.%s.%s.%s",
-                systemMetadata.get("tenantId"),
-                systemMetadata.get("checkType"),
-                systemMetadata.get("accountId"),
-                systemMetadata.get("entityId"),
-                systemMetadata.get("checkId")
-        );
+        return this.rollupKey;
     }
 
     @Override

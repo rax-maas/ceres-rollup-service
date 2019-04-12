@@ -158,8 +158,9 @@ management:
   metrics:
     tags:
       stack: "prod"
+      service: "rollup-service"
     export:
       influx:
         db: ceres
-        uri: http://data-influxdb:8086
+        uri: ${INFLUXDB_METRICS_URL}
         auto-create-db: true

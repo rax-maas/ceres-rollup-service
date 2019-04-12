@@ -1,5 +1,6 @@
 package com.rackspacecloud.metrics.rollup.domain;
 
+import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,6 +10,7 @@ import java.util.Map;
 /**
  * This class contains rolled-up data
  */
+@Data
 public class RolledUp {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RolledUp.class);
@@ -27,16 +29,17 @@ public class RolledUp {
     }
 
     // InfluxDB tags
-    public AccountType accountType;
-    public String account;
-    public String device;
-    public String deviceLabel;
-    public Map<String, String> deviceMetadata;
-    public MonitoringSystem monitoringSystem;
-    public Map<String, String> systemMetadata;
-    public String collectionLabel;
-    public String collectionTarget;
-    public Map<String, String> collectionMetadata;
+    String accountType;
+    String account;
+    String device;
+    String deviceLabel;
+    Map<String, String> deviceMetadata;
+    String monitoringSystem;
+    Map<String, String> systemMetadata;
+    String collectionName;
+    String collectionLabel;
+    String collectionTarget;
+    Map<String, String> collectionMetadata;
 
     public Map<String, String> units;
 
@@ -141,7 +144,7 @@ public class RolledUp {
         });
     }
 
-    private void populateMetricData(Metric metric){
+    private void populateMetricData(Metric metric) {
         this.account = metric.account;
         this.accountType = metric.accountType;
         this.device = metric.device;
@@ -149,6 +152,7 @@ public class RolledUp {
         metric.deviceMetadata.forEach((k, v) -> this.deviceMetadata.put(k, v));
         this.monitoringSystem = metric.monitoringSystem;
         metric.systemMetadata.forEach((k, v) -> this.systemMetadata.put(k, v));
+        this.collectionName = metric.collectionName;
         this.collectionLabel = metric.collectionLabel;
         this.collectionTarget = metric.collectionTarget;
         metric.collectionMetadata.forEach((k, v) -> this.collectionMetadata.put(k, v));
