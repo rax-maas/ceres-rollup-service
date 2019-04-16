@@ -62,5 +62,7 @@ public class MetricRollup {
         T min;
         T max;
         T mean;
+        T sum;
+        long count;
     }
 }
