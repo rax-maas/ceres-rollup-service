@@ -1,11 +1,3 @@
-#steps:
-#  - name: 'gcr.io/cloud-builders/mvn'
-#    id: DEPLOY
-#    args: ['-Ddocker.image.prefix=gcr.io/ceres-dev-222017', 'package', 'jib:dockerBuild']
-#
-#images:
-#  - 'gcr.io/ceres-dev-222017/metrics-rollup-service'
-
 substitutions:
   _GCS_CACHE_BUCKET: ceres-cache
   _CERES_PROJECT: ceres-rollup-service
@@ -48,6 +40,8 @@ steps:
     - name: user.home
       path: /root
 
+  # This phase is when the tests are run, the app is packaged into a container,
+  # and its pushed to the Google Container Registry
   - id: PACKAGE_AND_PUSH_CONTAINER
     name: 'gcr.io/cloud-builders/mvn'
     env:
@@ -83,4 +77,3 @@ steps:
     volumes:
     - name: user.home
       path: /root
-
