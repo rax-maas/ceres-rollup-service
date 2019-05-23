@@ -19,7 +19,7 @@ public class RolledUp {
     public long start;  // Start timestamp for the rolled-up data
     public long end;    // End timestamp for the rolled-up data
 
-    public Map<String, Metric.RollupBucket<Long>> ivalues;   // Keeps rolled up ivalue
+    public Map<String, Metric.RollupBucket<Double>> ivalues;   // Keeps rolled up ivalue
     public Map<String, Metric.RollupBucket<Double>> fvalues; // Keeps rolled up fvalue
 
     // InfluxDB tags
@@ -81,7 +81,7 @@ public class RolledUp {
         metric.collectionMetadata.forEach((k, v) -> this.collectionMetadata.put(k, v));
         metric.units.forEach((k, v) -> this.units.put(k, v));
 
-        this.ivalues = metric.getRolledUpIValues();
-        this.fvalues = metric.getRolledUpFValues();
+        this.ivalues = metric.getExistingRolledUpIValues();
+        this.fvalues = metric.getExistingRolledUpFValues();
     }
 }
