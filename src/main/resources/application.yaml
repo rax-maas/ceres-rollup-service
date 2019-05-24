@@ -1,3 +1,6 @@
+server:
+  port: 8084
+
 spring:
   application:
     name: rollup-unified-metrics
@@ -5,6 +8,9 @@ spring:
 ---
 spring:
   profiles: test
+
+server:
+  port: 8084
 
 kafka:
   servers: ${spring.embedded.kafka.brokers}
@@ -43,6 +49,9 @@ logging:
 ---
 spring:
   profiles: development
+
+server:
+  port: 8084
 
 kafka:
   servers: ${TEST_KAFKA_BOOTSTRAP_SERVERS}
@@ -106,6 +115,9 @@ management:
 spring:
   profiles: production
 
+server:
+  port: 8080
+
 kafka:
   servers: ${KAFKA_BOOTSTRAP_SERVERS}
 
@@ -158,8 +170,9 @@ management:
   metrics:
     tags:
       stack: "prod"
+      service: "rollup-service"
     export:
       influx:
         db: ceres
-        uri: http://data-influxdb:8086
+        uri: ${INFLUXDB_METRICS_URL}
         auto-create-db: true
