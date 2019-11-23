@@ -54,17 +54,7 @@ server:
   port: 8084
 
 kafka:
-  servers: ${TEST_KAFKA_BOOTSTRAP_SERVERS}
-
-  ssl:
-    truststore-location: ${TRUSTSTORE_LOCATION}
-    truststore-password: ${TRUSTSTORE_PASSWORD}
-    keystore-location: ${KEYSTORE_LOCATION}
-    keystore-password: ${KEYSTORE_PASSWORD}
-    key-password: ${KEY_PASSWORD}
-    endpoint-identification-algorithm: ""
-  properties:
-    security-protocol: SSL
+  servers: "localhost:9092"
 
   topics:
     in: unified.metrics.json
