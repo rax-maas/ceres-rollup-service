@@ -3,11 +3,10 @@ We are using Kafka to do aggregation (rollup) of raw data. This service aggregat
 
 ## Setup
 Install docker. Once done with that, you can use [`test-infrastructure`](https://github.com/racker/ceres-test-infrastructure) repository to install and run `Kafka`, `InfluxDB` and `Redis`. Please follow instruction from that repository to install them. Rollup service needs `Kafka` only. <br />
-**WORK-IN-PROGRESS** <br />
-Ideally we should have all of these components in `docker-compose`, but for now, we might have to follow a little manual process. <br />
+
 To run or test Rollup Service locally:
-- Get repo `ingestion-service-functional-test` and after building it. 
-  - Go to `ingestion-service-functional-test` folder locally
-  - Run `java -jar target/ingestion-service-functional-test-0.0.1-SNAPSHOT.jar` This will create raw test data into Kafka.
+- Get repo [`test-data-generator`](https://github.com/racker/ceres-test-data-generator) and after building it. 
+  - Go to `test-data-generator` folder locally
+  - Run `java -jar target/test-data-generator-0.0.1-SNAPSHOT.jar` This will create raw test data into Kafka.
   <br />
   Now you can run rollup-service using IntelliJ to do your development work.
