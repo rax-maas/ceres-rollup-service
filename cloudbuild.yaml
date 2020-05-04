@@ -22,8 +22,8 @@ steps:
       path: /root
 
   - id: TESTING
-    name: 'openjdk:11.0.6-slim'
-    args: ['test']
+    name: 'maven:3.6-jdk-11'
+    args: ['mvn', '-B', 'test']
     volumes:
     - name: user.home
       path: /root
