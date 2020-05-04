@@ -22,7 +22,7 @@ steps:
       path: /root
 
   - id: TESTING
-    name: 'gcr.io/cloud-builders/mvn'
+    name: 'openjdk:11.0.6-slim'
     args: ['test']
     volumes:
     - name: user.home
