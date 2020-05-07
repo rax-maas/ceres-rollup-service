@@ -23,6 +23,7 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.kafka.test.rule.KafkaEmbedded;
 import org.springframework.kafka.test.utils.KafkaTestUtils;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Map;
@@ -35,6 +36,7 @@ import java.util.Map;
         "${kafka.topics.in}",
         "${kafka.topics.out-level-1}"
 })
+@ActiveProfiles("test")
 public class RollupServiceApplicationTests {
 
     @Autowired
