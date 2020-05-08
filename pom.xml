@@ -1,83 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<!--
+  ~ Copyright 2020 Rackspace US, Inc.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.rackspacecloud.metrics</groupId>
-	<artifactId>rollup-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+    <groupId>com.rackspacecloud.metrics</groupId>
+    <artifactId>rollup-service</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
-	<name>rollup</name>
-	<description>Demo project for Spring Boot</description>
+    <name>rollup</name>
+    <description>Demo project for Spring Boot</description>
 
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.0.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.0.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
         <avro.version>1.8.2</avro.version>
         <spring-kafka.version>2.2.2.RELEASE</spring-kafka.version>
-		<spring-boot-configuration-processor.version>2.1.0.RELEASE</spring-boot-configuration-processor.version>
+        <spring-boot-configuration-processor.version>2.1.0.RELEASE
+        </spring-boot-configuration-processor.version>
 
-		<!-- Pass on right value to publish the docker image to the registry -->
-		<docker.image.prefix>gcr.io/PROJECT_ID</docker.image.prefix>
-	</properties>
+        <!-- Pass on right value to publish the docker image to the registry -->
+        <docker.image.prefix>gcr.io/PROJECT_ID</docker.image.prefix>
+    </properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.kafka</groupId>
-			<artifactId>kafka-streams</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.kafka</groupId>
-			<artifactId>spring-kafka</artifactId>
-			<version>${spring-kafka.version}</version>
-		</dependency>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-streams</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+            <version>${spring-kafka.version}</version>
+        </dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-configuration-processor</artifactId>
-			<version>${spring-boot-configuration-processor.version}</version>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <version>${spring-boot-configuration-processor.version}</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
 
-		<!-- API, java.xml.bind module -->
-		<dependency>
-			<groupId>jakarta.xml.bind</groupId>
-			<artifactId>jakarta.xml.bind-api</artifactId>
-			<version>2.3.2</version>
-		</dependency>
+        <!-- API, java.xml.bind module -->
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>2.3.2</version>
+        </dependency>
 
-		<!-- Runtime, com.sun.xml.bind module -->
-		<dependency>
-			<groupId>org.glassfish.jaxb</groupId>
-			<artifactId>jaxb-runtime</artifactId>
-			<version>2.3.2</version>
-		</dependency>
+        <!-- Runtime, com.sun.xml.bind module -->
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>2.3.2</version>
+        </dependency>
 
         <!-- avro -->
         <dependency>
@@ -85,29 +102,29 @@
             <artifactId>avro</artifactId>
             <version>${avro.version}</version>
         </dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-math3</artifactId>
-			<version>3.6.1</version>
-		</dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+            <version>3.6.1</version>
+        </dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
-			<version>1.10.19</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.kafka</groupId>
-			<artifactId>spring-kafka-test</artifactId>
-			<version>2.1.4.RELEASE</version>
-			<scope>test</scope>
-		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.10.19</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka-test</artifactId>
+            <version>2.1.4.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-core</artifactId>
@@ -118,14 +135,17 @@
             <artifactId>micrometer-registry-influx</artifactId>
             <version>1.1.2</version>
         </dependency>
-	</dependencies>
+    </dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <profiles>development</profiles>
+                </configuration>
+            </plugin>
 
             <!-- avro-maven-plugin -->
             <plugin>
@@ -139,7 +159,8 @@
                             <goal>schema</goal>
                         </goals>
                         <configuration>
-                            <sourceDirectory>${project.basedir}/src/test/resources/avro/</sourceDirectory>
+                            <sourceDirectory>${project.basedir}/src/test/resources/avro/
+                            </sourceDirectory>
                             <stringType>String</stringType>
                         </configuration>
                     </execution>
@@ -173,14 +194,14 @@
                 <version>2.1.0</version>
                 <configuration>
                     <from>
-                      <image>openjdk:11.0.6-slim</image>
+                        <image>openjdk:11.0.6-slim</image>
                     </from>
                     <to>
                         <image>${docker.image.prefix}/metrics-rollup-service</image>
                         <tags>
-                          <tag>${project.version}</tag>
-                          <tag>${env.SHORT_SHA}</tag>
-                          <tag>${env.BRANCH_NAME}</tag>
+                            <tag>${project.version}</tag>
+                            <tag>${env.SHORT_SHA}</tag>
+                            <tag>${env.BRANCH_NAME}</tag>
                         </tags>
                     </to>
                 </configuration>
@@ -194,6 +215,6 @@
                     <useSystemClassLoader>false</useSystemClassLoader>
                 </configuration>
             </plugin>
-		</plugins>
-	</build>
+        </plugins>
+    </build>
 </project>

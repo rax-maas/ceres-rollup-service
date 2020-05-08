@@ -4,6 +4,10 @@ server:
 spring:
   application:
     name: rollup-unified-metrics
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: production
 
 ---
 spring:
