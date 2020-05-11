@@ -1,0 +1,38 @@
+@startuml
+center header <b>Ceres Rollup Service Architecture
+queue "unified.metrics.json topic" as input
+card Metrics
+note right: com.rackspacecloud.metrics.rollup.domain.Metric
+node KTable [
+<b> KTable
+==========
+5m Tumbling Window
+==========
+20m Tumbling Window
+==========
+60m Tumbling Window
+==========
+240m Tumbling Window
+==========
+1440m Tumbling Window
+] 
+note right: com.rackspacecloud.metrics.rollup.config.TopologyConfiguration
+card Rollups
+note right: com.rackspacecloud.metrics.rollup.domain.RolledUp
+note bottom: rollups contain: min, max, mean, sum, count for the corresponding window
+queue 5m
+note left: these are all kafka topics
+queue 20m
+queue 60m
+queue 240m
+queue 1440m
+
+input --> Metrics
+Metrics --> KTable : grouped by key:  accountType.account.monitoringSystem.collectionName.device.deviceLabel.collectionLabel
+KTable --> Rollups
+Rollups --> 5m
+Rollups --> 20m
+Rollups --> 60m
+Rollups --> 240m
+Rollups --> 1440m
+@enduml
