@@ -21,7 +21,7 @@ card Rollups
 note right: com.rackspacecloud.metrics.rollup.domain.RolledUp
 note bottom: rollups contain: min, max, mean, sum, count for the corresponding window
 queue 5m
-note left: these are all kafka topics
+note left: these are all kafka topics prefixed with: "unified.metrics.json."
 queue 20m
 queue 60m
 queue 240m
